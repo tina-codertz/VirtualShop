@@ -2,7 +2,7 @@ import axios from 'axios';
 import { userData } from 'three/src/nodes/accessors/UserDataNode.js';
 
 const api = axios.create({
-    baseURL:API_URL,
+    baseURL:"http://localhost:3000/api",
     headers:{
         "Content-Type":"application/json",
 
