@@ -34,9 +34,8 @@ const Navbar = () => {
             {/* Navigation Links */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#home" className="text-gray-300 hover:text-white transition-colors">Home</a>
-              <a href="#products" className="text-gray-300 hover:text-white transition-colors">Products</a>
               <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
-              <a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a>
+            
             </div>
 
             {/* Auth Buttons */}
@@ -65,12 +64,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  <button
-                    onClick={() => openAuthModal('login')}
-                    className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
-                  >
-                    Login
-                  </button>
+                 
                   <button
                     onClick={() => openAuthModal('register')}
                     className="px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg transition-all hover-glow"

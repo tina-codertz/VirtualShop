@@ -57,13 +57,13 @@ const Home = () => {
             {[
               {
                 icon: '🎮',
-                title: 'Immersive 3D',
+                title: 'Immersive 3D and VR',
                 description: 'View products from every angle with photorealistic 3D rendering',
               },
               {
                 icon: '🥽',
-                title: 'VR Ready',
-                description: 'Step into virtual showrooms with full VR headset support',
+                title: 'Easy shopping',
+                description: 'Explore the products of you choice and decide how you pay for them with delivery',
               },
               {
                 icon: '⚡',

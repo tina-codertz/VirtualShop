@@ -104,7 +104,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
-                      placeholder="johndoe"
+                      placeholder="user"
                     />
                   </div>
                 )}
@@ -120,7 +120,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
-                    placeholder="john@example.com"
+                    placeholder="user@example.com"
                   />
                 </div>
 
@@ -140,37 +140,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                   />
                 </div>
 
-                {mode === 'register' && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Register as
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setFormData({ ...formData, role: 'user' })}
-                        className={`px-4 py-3 rounded-lg border transition-all ${
-                          formData.role === 'user'
-                            ? 'bg-blue-600 border-blue-500 text-white'
-                            : 'bg-gray-700/50 border-gray-600 text-gray-400 hover:border-gray-500'
-                        }`}
-                      >
-                        👤 User
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setFormData({ ...formData, role: 'admin' })}
-                        className={`px-4 py-3 rounded-lg border transition-all ${
-                          formData.role === 'admin'
-                            ? 'bg-purple-600 border-purple-500 text-white'
-                            : 'bg-gray-700/50 border-gray-600 text-gray-400 hover:border-gray-500'
-                        }`}
-                      >
-                        ⚡ Admin
-                      </button>
-                    </div>
-                  </div>
-                )}
+              
 
                 <button
                   type="submit"
