@@ -17,13 +17,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  useEffect(() => {
-    if (token) {
-      loadUser();
-    } else {
-      setLoading(false);
-    }
-  }, [token]);
+//   useEffect(() => {
+//     if (token) {
+//       loadUser();
+//     } else {
+//       setLoading(false);
+//     }
+//   }, [token]);
 
  
 

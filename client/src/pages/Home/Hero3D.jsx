@@ -77,7 +77,7 @@ const Hero3D = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl md:text-8xl font-bold mb-6"
           >
-            <span className="gradient-text">VISIONAIRE</span>
+            <span className="gradient-text text-white">Virtual Shop</span>
           </motion.h1>
           
           <motion.p
@@ -93,36 +93,17 @@ const Hero3D = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center text-white"
           >
             <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg font-semibold text-lg transition-all hover-glow">
-              Explore in 3D
+              Explore product in 3D
             </button>
             <button className="px-8 py-4 glass-effect hover:bg-white/20 rounded-lg font-semibold text-lg transition-all">
-              Enter VR Mode
+              Easy shopping
             </button>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="flex justify-center gap-8 mt-16"
-          >
-            <div>
-              <div className="text-3xl font-bold gradient-text">1000+</div>
-              <div className="text-gray-400">3D Products</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold gradient-text">50K+</div>
-              <div className="text-gray-400">Happy Users</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold gradient-text">24/7</div>
-              <div className="text-gray-400">VR Support</div>
-            </div>
-          </motion.div>
+         
         </div>
       </div>
 
