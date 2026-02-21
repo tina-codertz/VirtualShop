@@ -1,8 +1,8 @@
 import { verify } from 'jsonwebtoken';
-import { findById } from '../models/User';
+import { UserModel } from '../models/User.js';
 
 // Protect routes - verify token
-export async function protect(req, res, next) {
+export async function authenticateToken(req, res, next) {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -18,13 +18,13 @@ export async function protect(req, res, next) {
     const decoded = verify(token, process.env.JWT_SECRET);
     
     // Get user from token
-    const user = await findById(decoded.id);
+    const user = await UserModel.findUserById(decoded.user_id);
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
 
     req.user = {
-      id: user.id,
+      user_id: user.user_id,
       role: user.role
     };
     

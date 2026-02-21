@@ -1,17 +1,19 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models/userModels.js';
+import { UserModel } from '../models/User.js';
 
 
 const AuthService = {
-  register: async (name, username, email, password) => {
+  register: async (name, username, email, password, role = 'user') => {
+    const allowedRoles = ['user', 'admin'];
+    const assignedRole = allowedRoles.includes(role) ? role : 'user';
+
     const existingUser = await UserModel.findUserByEmail(email);
     if (existingUser) throw new Error('Email already exists');
 
     const password_hash = await bcrypt.hash(password, 10);
-    const user = await UserModel.createUser(name, username, email, password_hash);
+    const user = await UserModel.createUser(name, username, email, password_hash, assignedRole);
     const token = jwt.sign({ user_id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
-    await LogModel.createLog(user.user_id, 'User registered');
     return { token, user };
   },
 
@@ -21,7 +23,6 @@ const AuthService = {
       throw new Error('Invalid credentials');
     }
     const token = jwt.sign({ user_id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
-    await LogModel.createLog(user.user_id, 'User logged in');
     return { token, user };
   },
 
