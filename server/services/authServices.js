@@ -1,15 +1,15 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models/User.js';
+import { UserModel } from '../models/userModels.js';
 
 
 const AuthService = {
-  register: async (name, email, password) => {
+  register: async (name, username, email, password) => {
     const existingUser = await UserModel.findUserByEmail(email);
     if (existingUser) throw new Error('Email already exists');
 
-    const passwordHash = await bcrypt.hash(password, 10);
-    const user = await UserModel.createUser(name, email, passwordHash);
+    const password_hash = await bcrypt.hash(password, 10);
+    const user = await UserModel.createUser(name, username, email, password_hash);
     const token = jwt.sign({ user_id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
     await LogModel.createLog(user.user_id, 'User registered');
     return { token, user };
@@ -31,4 +31,5 @@ const AuthService = {
     return user;
   }
 };
-export default AuthService
+
+export default AuthService;
