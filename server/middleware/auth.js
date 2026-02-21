@@ -1,4 +1,4 @@
-import { verify } from 'jsonwebtoken';
+import verify from 'jsonwebtoken';
 import { UserModel } from '../models/User.js';
 
 // Protect routes - verify token

@@ -13,7 +13,7 @@ const AuthService = {
 
     const password_hash = await bcrypt.hash(password, 10);
     const user = await UserModel.createUser(name, username, email, password_hash, assignedRole);
-    const token = jwt.sign({ user_id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign({ user_id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
     return { token, user };
   },
 
@@ -22,7 +22,7 @@ const AuthService = {
     if (!user || !(await bcrypt.compare(password, user.password_hash))) {
       throw new Error('Invalid credentials');
     }
-    const token = jwt.sign({ user_id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign({ user_id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
     return { token, user };
   },
 

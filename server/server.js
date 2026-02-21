@@ -27,7 +27,7 @@ app.use(express.json());
 app.set('io', io);
 
 // Routes
-app.use('/api', router);
+app.use('/api/auth', router);
 
 
 const PORT = process.env.PORT || 3000;

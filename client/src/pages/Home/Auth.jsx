@@ -93,20 +93,31 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
                 {mode === 'register' && (
-                  <div>
+                  <><div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Username
+                     Name
                     </label>
                     <input
                       type="text"
-                      name="username"
-                      value={formData.username}
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
-                      placeholder="user"
-                    />
-                  </div>
+                      placeholder="User Name" />
+                  </div><div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Username
+                      </label>
+                      <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
+                        placeholder="user" />
+                    </div></>
                 )}
 
                 <div>
