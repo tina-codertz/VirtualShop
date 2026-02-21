@@ -1,26 +1,40 @@
-import pool from '../database/db.js';
+import AuthService from '../services/authServices.js';
 
-export const UserModel = {
-  createUser: async (name, username, email, password_hash, role = 'user') => {
-    const result = await pool.query(
-      'INSERT INTO users (name, username, email, password_hash, role, created_at) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING user_id, name, username, email, role',
-      [name, username, email, password_hash, role]
-    );
-    return result.rows[0];
+const AuthController = {
+  register: async (req, res) => {
+    try {
+      const { name, username, email, password, role } = req.body;
+      if (!name || !username || !email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+      }
+      const result = await AuthService.register(name, username, email, password, role);
+      res.status(201).json(result);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   },
 
-  findUserByEmail: async (email) => {
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    return result.rows[0];
+  login: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+      }
+      const result = await AuthService.login(email, password);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
   },
 
-  findUserById: async (userId) => {
-    const result = await pool.query('SELECT user_id, name, email, role FROM users WHERE user_id = $1', [userId]);
-    return result.rows[0];
-  },
-
-  getAllUsers: async () => {
-    const result = await pool.query('SELECT user_id, name, email, role FROM users');
-    return result.rows;
+  getUser: async (req, res) => {
+    try {
+      const user = await AuthService.getUser(req.user.user_id);
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
   }
 };
+
+export default AuthController;
