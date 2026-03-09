@@ -16,7 +16,7 @@ export async function authenticateToken(req, res, next) {
   try {
     // Verify token
     const decoded = verify(token, process.env.JWT_SECRET);
-    
+
     // Get user from token
     const user = await UserModel.findUserById(decoded.user_id);
     if (!user) {
@@ -24,10 +24,10 @@ export async function authenticateToken(req, res, next) {
     }
 
     req.user = {
-      user_id: user.user_id,
+      user_id: user.id,
       role: user.role
     };
-    
+
     next();
   } catch (error) {
     console.error(error);

@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useShop } from '../../context/ShopContext';
 
 const ProductCard = ({ product, index }) => {
+  const { addToCart } = useShop();
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -30,17 +32,24 @@ const ProductCard = ({ product, index }) => {
             {product.name}
           </h3>
           <p className="text-gray-400 text-sm mb-4">{product.description}</p>
-          
+
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold gradient-text">
               ${product.price}
             </span>
-            <button className="px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg transition-all flex items-center gap-2">
-              <span>View in 3D</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all hover-glow"
+              >
+                Add to Cart
+              </button>
+              <button className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* VR Badge */}

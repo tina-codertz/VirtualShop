@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { motion } from 'framer-motion';
 import Hero3D from './Hero3D';
 import ProductCard from './ProductCard';
 import Navbar from '../../components/Navbar';
-
-
+import { productAPI } from '../../api/api';
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await productAPI.getAll();
+        setProducts(res.data);
+      } catch (err) {
+        console.error("Failed to load products", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-900">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section id="home">
         <Hero3D />
@@ -33,7 +49,17 @@ const Home = () => {
           </p>
         </motion.div>
 
-        
+        {loading ? (
+          <div className="text-center text-gray-400">Loading products...</div>
+        ) : products.length === 0 ? (
+          <div className="text-center text-gray-400">No products available.</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product, idx) => (
+              <ProductCard key={product.id} product={product} index={idx} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Features Section */}
@@ -88,7 +114,7 @@ const Home = () => {
         </div>
       </section>
 
- 
+
     </div>
   );
 };
