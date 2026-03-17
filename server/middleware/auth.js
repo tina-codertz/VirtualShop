@@ -1,4 +1,4 @@
-import verify from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { UserModel } from '../models/User.js';
 
 // Protect routes - verify token
@@ -15,7 +15,7 @@ export async function authenticateToken(req, res, next) {
 
   try {
     // Verify token
-    const decoded = verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Get user from token
     const user = await UserModel.findUserById(decoded.user_id);
